@@ -709,7 +709,7 @@ class Convert:
 
 
 def multi_bands_form_multi_rasters(raster_list: List, output_path: str, no_data: Optional[float] = None,
-                                   mask_vls: Optional[List] = None, band_idx=1, dtype = 'uint16') -> str:
+                                   mask_vls: Optional[List] = None, band_idx=1, dtype='uint16') -> str:
     """
     Notes: we assume the input raster have the same resolution and projection system
     """
@@ -731,7 +731,7 @@ def multi_bands_form_multi_rasters(raster_list: List, output_path: str, no_data:
         band_description.append("Band" + str(index + 1) + "_" + Path(img_).stem)
 
     cRasterInfo.write_raster(output_raster_path=output_path, array_list=array_list, geo_transform=info.geo_transform,
-                             epsg_code=info.epsg_code, descriptions=band_description, no_data=no_data, dtype= dtype)
+                             epsg_code=info.epsg_code, descriptions=band_description, no_data=no_data, dtype=dtype)
     return output_path
 
 
@@ -778,8 +778,8 @@ class geoStat:
         return "mu:{} , sigm:{} , RMSE:{}, CE90:{}".format(self.mu, self.sigma, self.RMSE, self.ce90)
 
 
-def crop_raster(input_raster, roi_coord_wind, output_dir: Optional[str] = None, vrt=False,
-                raster_type=gdal.GDT_Float32):
+def crop_raster(input_raster, roi_coord_wind, output_dir: Optional[str] = None, vrt: bool = False,
+                raster_type=gdal.GDT_Float32, no_data: float = -32767):
     if output_dir is None:
         output_dir = os.path.dirname(input_raster)
 
@@ -789,7 +789,7 @@ def crop_raster(input_raster, roi_coord_wind, output_dir: Optional[str] = None, 
     else:
         format = "GTiff"
         o_path = os.path.join(output_dir, f"{Path(input_raster).stem}.crop.tif")
-    params = gdal.TranslateOptions(projWin=roi_coord_wind, format=format, outputType=raster_type, noData=-32767)
+    params = gdal.TranslateOptions(projWin=roi_coord_wind, format=format, outputType=raster_type, noData=no_data)
 
     gdal.Translate(destName=o_path,
                    srcDS=gdal.Open(input_raster),

@@ -275,7 +275,7 @@ class Correlate(RawCorrelation):
         ns_array = corr_raster_info.raster_array[1]
 
         cmap = cfg['cmap']
-        fig, axs = plt.subplots(1, 2)  # , layout="constrained")  # , figsize=(16, 9))
+        fig, axs = plt.subplots(1, 2 , layout="constrained"  , figsize=(16, 9))
 
         if ground_space:
             cmap = 'RdBu'  # 'bwr'
