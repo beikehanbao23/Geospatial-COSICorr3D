@@ -5,7 +5,7 @@
 #### 2. 管理员权限启动"Windows PowerShell"，执行
  ```
     docker load -i  geocosicorr3d.tar
-    docker tag 1909a7bcd1ea geocosicorr3d:huzhenhui
+    docker tag 1909a7bcd1ea geocosicorr3d:huzh
     docker-compose -f  docker-compose.yml run geocosicorr3d
  ```
  #### 3. 启动成功后可在【Windows Docker Desktop】中查看对应容器
