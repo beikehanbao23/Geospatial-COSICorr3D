@@ -2,16 +2,18 @@ version: '3.4'
 services:
   geocosicorr3d:
     # Use a more descriptive image name with a tag
-    image: geocosicorr3d:latest
+    image: geocosicorr3d:huzh
     platform: linux/amd64
     build:
       context: .
     volumes:
       # Bind the current directory to the app directory inside the container
       - type: bind
-        source: ${PWD}
+        # 下载的代码路径
+        source: D:/github/Geospatial-COSICorr3D
         target: /usr/src/app/geoCosiCorr3D
       # Bind the /home/cosicorr directory on the host to the same directory inside the container
       - type: bind
-        source: ${HOME}
+        # 配置成自己的用户路径
+        source: C:/Users/huzh
         target: /home/user
